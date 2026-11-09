@@ -1,4 +1,4 @@
-baseurl: https://example.com
+baseurl: https://robot210.github.io/blog/
 languageCode: zn-cn
 theme: hugo-theme-stack
 paginate: 5
@@ -27,7 +27,7 @@ languages:
             description: وصف تجريبي
 
 # Change it to your Disqus shortname before using
-disqusShortname: hugo-theme-stack
+disqusShortname:
 
 # GA Tracking ID
 googleAnalytics:

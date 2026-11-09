@@ -1,48 +1,43 @@
-name: GitHub Page
+name: Deploy to GitHub Pages
 
 on:
     push:
         branches:
-            - main # main 更新触发
+            - main # main 更新即触发
+    workflow_dispatch: # 也可以在 Actions 页面手动触发
+
+# peaceiris 要往 gh-pages 分支推送，需要写权限
+permissions:
+    contents: write
 
 jobs:
     deploy:
         runs-on: ubuntu-latest
+
         steps:
-            - uses: actions/checkout@v3
-              with:
-                  submodules: true # clone submodules
-                  fetch-depth: 0 # 克隆所有历史信息
+            - uses: actions/checkout@v4
 
             - name: Setup Hugo
               uses: peaceiris/actions-hugo@v2
               with:
-                  hugo-version: "0.115.2" # Hugo 版本
-                  extended: true # hugo插件版 Stack主题 必须启用
+                  hugo-version: "0.115.2"
+                  extended: true # Stack 主题需要 extended 版
 
-            - name: Cache resources # 缓存 resource 文件加快生成速度
+            - name: Cache resources
               uses: actions/cache@v3
               with:
                   path: resources
-                  # 检查照片文件变化
                   key: ${{ runner.os }}-hugocache-${{ hashFiles('content/**/*') }}
                   restore-keys: ${{ runner.os }}-hugocache-
 
-            - name: Build # 生成网页 删除无用 resource 文件 削减空行
+            - name: Build
               run: hugo --minify --gc
 
-            - name: Deploy # 部署到 GitHub Page
+            - name: Deploy
               uses: peaceiris/actions-gh-pages@v3
               with:
-                  # 如果在同一个仓库下使用请使用 github_token 并注释 deploy_key
-                  # github_token: ${{ secrets.GITHUB_TOKEN }}
-                  deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-
-                  # 如果在同一个仓库请注释
-                  external_repository: lin-snow/blog # 你的 GitHub page 仓库 example/example.github.io
-
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
                   publish_dir: ./public
                   user_name: "github-actions[bot]"
                   user_email: "github-actions[bot]@users.noreply.github.com"
-                  full_commit_message: Deploy from ${{ github.repository }}@${{ github.sha }} 🚀
-                
+                  full_commit_message: "Deploy from ${{ github.repository }}@${{ github.sha }}"

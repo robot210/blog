@@ -1,9 +1,30 @@
-hugo #构造你的blog
+#!/bin/sh
+# =============================================================================
+#  本地构建 / 预览
+# -----------------------------------------------------------------------------
+#  部署不需要跑这个脚本：push 到 main 之后，
+#  .github/workflows/deploy.yml 会自动构建并发布到 gh-pages 分支。
+#
+#  这个脚本只用来在本地看效果：
+#    sh deploy.sh          构建到 public/
+#    sh deploy.sh serve    起本地服务器（改文件自动刷新）
+# =============================================================================
 
-git init #初始化git
+set -e
 
-git add -A
+if ! command -v hugo >/dev/null 2>&1; then
+    printf '× 没找到 hugo，先装：https://gohugo.io/installation/windows/\n' >&2
+    printf '  （需要 extended 版本，Stack 主题依赖 SCSS 编译）\n' >&2
+    exit 1
+fi
 
-git commit -m 'deploy'
-
-git push -f git@github.com:robot210/bolg.file.git main#向存储库推送
+case "${1:-}" in
+    serve)
+        hugo server -D --navigateToChanged
+        ;;
+    *)
+        hugo --minify --gc
+        printf '\n✓ 构建完成 -> public/\n'
+        printf '  本地预览：sh deploy.sh serve\n'
+        ;;
+esac
