@@ -1,0 +1,13 @@
+# Hugo 构建产物（CI 会重新生成，不要进版本库）
+public/
+resources/
+.hugo_build.lock
+
+# 编辑器 / 系统
+.vs/
+*.swp
+.DS_Store
+Thumbs.db
+
+# 本地环境
+.env

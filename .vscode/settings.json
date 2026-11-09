@@ -1,0 +1,5 @@
+{
+    "yaml.schemas": {
+        "https://json.schemastore.org/github-workflow.json": "file:///c%3A/Users/12764/OneDrive/%E6%A1%8C%E9%9D%A2/blog/.github/workflows/deploy.yml"
+    }
+}
