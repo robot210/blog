@@ -10,11 +10,11 @@ Hugo + [Stack](https://github.com/CaiJimmy/hugo-theme-stack) 主题的个人站�
 | 路径 | 作用 |
 | --- | --- |
 | `content/` | 文章（Markdown） |
-| `layouts/` `assets/` `static/` | 站点级的覆盖文件与静态资源 |
 | `themes/hugo-theme-stack/` | 主题，随仓库提交（不是子模块） |
 | `config.yaml` | 站点配置：标题、语言、`baseurl` |
 | `.githooks/pre-commit` | 提交前的体积检查 |
 | `.github/workflows/deploy.yml` | 自动部署 |
+| `AGENTS.md` | 给 AI / 新人的项目约定 |
 
 ## 日常操作
 
@@ -72,9 +72,9 @@ git config --add hooks.sizeCheck.exclude 'src/legacy/*'
 
 - `public/`、`resources/` 是构建产物，已 gitignore，不要提交
 - 主题文件直接进仓库，升级时手动替换 `themes/hugo-theme-stack/`
+- `layouts/`、`assets/`、`static/` 默认不存在；要覆盖主题文件时再新建同名路径
 - 2026-11 从 OneDrive 迁出并重建历史（原仓库 `git init` 后从未提交）
 
 ## 待办
 
 - [ ] 首次 `git push` 并打开 Pages
-- [ ] 清理 `config.yaml` 里 `en` / `ar` 的模板占位文案

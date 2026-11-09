@@ -1,8 +1,8 @@
 baseurl: https://robot210.github.io/blog/
-languageCode: zn-cn
+languageCode: zh-cn
 theme: hugo-theme-stack
 paginate: 5
-title: 220's Blg
+title: 220's Blog
 copyright: 220
 
 languages:
@@ -12,25 +12,6 @@ languages:
         weight: 1
         params:
             description: 快乐一天.🤌
-    en:
-        languageName: Enlish
-        title: 220' blog'
-        weight: 2
-        params:
-            description: happy one day.🤌
-    ar:
-        languageName: عربي
-        languagedirection: rtl
-        title: موقع تجريبي
-        weight: 3
-        params:
-            description: وصف تجريبي
-
-# Change it to your Disqus shortname before using
-disqusShortname:
-
-# GA Tracking ID
-googleAnalytics:
 
 # Theme i18n support
 # Available values: ar, bn, ca, de, el, en, es, fr, hu, id, it, ja, ko, nl, pt-br, th, uk, zh-cn, zh-hk, zh-tw
@@ -64,8 +45,9 @@ params:
         emoji: 🍥
         subtitle: 快乐一天.🤌
         avatar:
-            enabled: true
-            local: false
+            # 想开：把图片放进 assets/img/avatar.png，再把 local 改成 true
+            enabled: false
+            local: true
             src: img/avatar.png
 
     article:
@@ -77,82 +59,11 @@ params:
             default: Licensed under CC BY-NC-SA 4.0
 
     comments:
-        enabled: true
-        provider: disqus
+        # 未选定评论服务，先关掉；开了会在文章底部渲染一个空白框
+        # 要启用：挑一个 provider 填好参数，再改 enabled: true
+        # https://docs.stack.jimmycai.com/configuration/comments.html
+        enabled: false
 
-        disqusjs:
-            shortname:
-            apiUrl:
-            apiKey:
-            admin:
-            adminLabel:
-
-        utterances:
-            repo:
-            issueTerm: pathname
-            label:
-
-        remark42:
-            host:
-            site:
-            locale:
-
-        vssue:
-            platform:
-            owner:
-            repo:
-            clientId:
-            clientSecret:
-            autoCreateIssue: false
-
-        # Waline client configuration see: https://waline.js.org/en/reference/component.html
-        waline:
-            serverURL:
-            lang:
-            pageview:
-            emoji:
-                - https://unpkg.com/@waline/emojis@1.0.1/weibo
-            requiredMeta:
-                - name
-                - email: 1276460935@qq.com
-                - url
-            locale:
-                admin: ☠博主
-                placeholder: 🎉留下你的脚印.
-
-        twikoo:
-            envId:
-            region:
-            path:
-            lang:
-
-        # See https://cactus.chat/docs/reference/web-client/#configuration for description of the various options
-        cactus:
-            defaultHomeserverUrl: "https://matrix.cactus.chat:8448"
-            serverName: "cactus.chat"
-            siteName: "" # You must insert a unique identifier here matching the one you registered (See https://cactus.chat/docs/getting-started/quick-start/#register-your-site)
-
-        giscus:
-            repo:
-            repoID:
-            category:
-            categoryID:
-            mapping:
-            lightTheme:
-            darkTheme:
-            reactionsEnabled: 1
-            emitMetadata: 0
-
-        gitalk:
-            owner:
-            admin:
-            repo:
-            clientID:
-            clientSecret:
-
-        cusdis:
-            host:
-            id:
     widgets:
         homepage:
             - type: search
@@ -206,7 +117,7 @@ menu:
           name: GitHub
           url: https://github.com/robot210
           params:
-              newTab: ture
+              newTab: true
               icon: brand-github
 
 

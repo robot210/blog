@@ -1,0 +1,6 @@
+# 站点在 Linux CI 上构建，统一 LF，避免 Windows 上 clone 出来把脚本写成 CRLF
+*       text=auto eol=lf
+
+# 脚本必须是 LF，否则 sh 会因 \r 报 bad interpreter
+*.sh        text eol=lf
+.githooks/* text eol=lf
