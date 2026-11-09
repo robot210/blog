@@ -66,7 +66,22 @@ git config --add hooks.sizeCheck.exclude 'src/legacy/*'
 ## 部署
 
 `main` 分支一 push 就会自动构建，产物推到 `gh-pages` 分支。
-仓库 Settings → Pages 的 Source 需要设为 `gh-pages` 分支的 `/ (root)`。
+Pages 的 Source 已设为 `gh-pages` 分支的 `/ (root)`。
+
+### 本机网络：只能走 SSH
+
+这台机器的 `github.com:443` 被运营商黑洞（TLS 握手直接超时），https 的 `git push` / `git fetch` 用不了；
+`github.com:22` 正常。所以本仓库的 remote 指向 SSH：
+
+```bash
+git remote set-url origin ssh://git@github.com/robot210/blog.git
+```
+
+认证靠 `~/.ssh/id_ed25519_blog`，它已注册成这个仓库的 deploy key（`dsh-push-deploy-key`，有写权限）。
+换机器时要重新配 key，或者改回 https。
+
+deploy key 不能创建或修改 `.github/workflows/` 下的文件（GitHub 的策略），
+要改 CI 得用带 `workflow` scope 的 token 推一次。
 
 ## 约定
 
@@ -77,4 +92,7 @@ git config --add hooks.sizeCheck.exclude 'src/legacy/*'
 
 ## 待办
 
-- [ ] 首次 `git push` 并打开 Pages
+- [x] 首次 `git push` 并打开 Pages（2026-11-09，gh-pages 已发布）
+- [ ] 写第一篇正式文章：现在 `content/post/` 里两篇都是 `draft = true`，线上文章列表是空的
+- [ ] 想开评论：配好服务后把 `params.comments.enabled` 改成 `true`
+- [ ] 想显示头像：图片放 `assets/img/avatar.png`，再把 `params.sidebar.avatar.enabled` 改成 `true`
